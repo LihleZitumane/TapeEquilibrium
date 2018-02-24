@@ -1,0 +1,50 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace TapeEquilibrium
+{
+  class Program
+  {
+    public static int solution(int[] A)
+    {
+      int[] differences = new int[A.Length - 1];
+      int differencesInd = 0;
+      for (int P = 1; P < A.Length; P++)
+      {
+        int i = 0;
+        int Part2Index = 0;
+        int sum1 = 0;
+        int sum2 = 0;
+        int[] FirstPart = new int[P];
+        int[] SecondPart = new int[A.Length - P];
+        while (i < P)
+        {
+          FirstPart[i] = A[i];
+          sum1 += A[i];
+          i++;
+        }
+        while (i >= P && i < A.Length)
+        {
+          SecondPart[Part2Index] = A[i];
+          sum2 += A[i];
+          Part2Index++;
+          i++;
+        }
+
+        differences[differencesInd++] += Math.Abs(sum2 - sum1);
+      }
+
+      return differences.Min();
+    }
+    static void Main(string[] args)
+    {
+      Console.WriteLine("Hello World!");
+      Console.WriteLine(solution(new int[] { 3, 1, 2, 4, 3 }));
+      Console.ReadLine();
+    }
+  }
+}
